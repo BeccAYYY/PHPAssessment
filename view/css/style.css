@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+
+header {
+    height: 150px;
+    background-color: paleturquoise;
+    overflow: hidden;
+    color: white;
+}
+
+footer {
+    height: 100px;
+    background-color: paleturquoise;
+}
+
+form {
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    background-color: white;
+}
+.field {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+label {
+    font-size: 0.5em;
+}
+
+li {
+    display: inline;
+    padding: 4px;
+}
+
+li:hover {
+    background-color: teal;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+
+}
+ul {
+    padding: 0;
+}
+
+input:checked + #DeathYear {
+    display: none;
+}
