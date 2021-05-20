@@ -1,5 +1,6 @@
 <?php
 $root_path = "../";
+$page_title = "Add Book";
 include "header.php";
 ?>
 

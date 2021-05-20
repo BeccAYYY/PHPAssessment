@@ -8,6 +8,7 @@ $user = new users;
 
     try {
         $user->get_information($Username, $FirstName, $LastName, $Password, $Role);
+        $user->validate();
         $user->insert_user($pdo);
         header("location:../view/adduser.php?msg=Saved");
     } catch (exception $e) {

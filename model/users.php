@@ -6,6 +6,7 @@ class users {
     Private $LastName;
     Private $Password;
     Private $Role;
+    Private $CreatedDate;
 
 //Data here comes from the form. "$this" refers to the current class. The variables in the brackets are parameters for this functions that will be fed in later.
     public function get_information($Username, $FirstName, $LastName, $Password, $Role) {
@@ -16,15 +17,60 @@ class users {
         $this->Role=$Role;
     }
 
+    Private $columns = [];
+
+    public function validate() {
+        if ($this->Username !== "") {
+            $this->columns[] = "Username";
+        } if ($this->FirstName !== "") {
+            $this->columns[] = "FirstName";
+        } if ($this->LastName !== "") {
+            $this->columns[] = "LastName";
+        } if ($this->Password !== "") {
+            $this->columns[] = "Password";
+        } if ($this->Role !== "") {
+            $this->columns[] = "Role";
+        }
+    }
+
+    function columns($columns) {
+        $array_values = array_values($columns);
+        $last_value = end($array_values);
+        $result = "";
+        foreach($columns as $v) {
+            if ($v !== $last_value) {
+                $result = $result . "`$v`, ";
+            } else {
+                $result = $result . "`$v`";
+            }
+        }
+        return $result;
+    }
+
+    function values($columns) {
+        $array_values = array_values($columns);
+        $last_value = end($array_values);
+        $result = "";
+        foreach($columns as $v) {
+            if ($v !== $last_value) {
+                $result = $result . ":$v, ";
+            } else {
+                $result = $result . ":$v";
+            }
+        }
+        return $result;
+    }
+    
+
 //The function to run the insert query after the previous function has got the information.
     public function insert_user($pdo) {
-        $query = "INSERT INTO users (`Username`, `FirstName`, `LastName`, `Password`, `Role`) VALUES (:u, :fn, :ln, :p, :r)";
+        
+
+        $query = "INSERT INTO users (" . $this->columns($this->columns) . ") VALUES (" . $this->values($this->columns). ")";
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(":u", $this->Username);
-        $stmt->bindParam(":fn", $this->FirstName);
-        $stmt->bindParam(":ln", $this->LastName);
-        $stmt->bindParam(":p", $this->Password);
-        $stmt->bindParam(":r", $this->Role);
+        foreach($this->columns as $v) {
+            $stmt->bindParam(":$v", $this->$v);
+        }
         $stmt->execute();
     }
 

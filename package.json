@@ -1,0 +1,22 @@
+{
+  "name": "phpassessment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BeccAYYY/PHPAssessment.git"
+  },
+  "author": "Becca Sell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BeccAYYY/PHPAssessment/issues"
+  },
+  "homepage": "https://github.com/BeccAYYY/PHPAssessment#readme",
+  "dependencies": {
+    "bootstrap": "^5.0.1"
+  }
+}

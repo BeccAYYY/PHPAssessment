@@ -1,5 +1,6 @@
 <?php
 $root_path = "../";
+$page_title = "Add User";
 include "header.php";
 ?>
 

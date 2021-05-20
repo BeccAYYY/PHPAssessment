@@ -32,8 +32,8 @@ class authors {
             $columns[] = "ImagePath"
         }
     }
-    function columns() {
-        $array_values = array_values($test);
+    function columns($columns) {
+        $array_values = array_values($columns);
         $last_value = end($array_values);
         foreach($test as $v) {
         if ($v !== $last_value) {
