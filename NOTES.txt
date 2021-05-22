@@ -1,0 +1,14 @@
+Login page/session management
+
+Add user
+Edit user (self) or admin (anyone)
+Lookup users (admin)
+
+
+Homepage
+
+Add book (with add author)
+Edit book (with delete function)
+
+Add author
+Edit Author (with delete)

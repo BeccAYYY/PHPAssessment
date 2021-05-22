@@ -7,8 +7,6 @@ $pdo = $conn->connect_db();
 $author = new authors;
 
     try {
-        //var_dump($_FILES["ImagePath"]);
-        //exit();
         if ($_FILES["ImagePath"]["size"] !== 0) {
             $imageName = mt_rand() . $_FILES["ImagePath"]["name"];
             $ImagePath = "../view/img/" . $imageName;

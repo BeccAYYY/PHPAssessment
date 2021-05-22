@@ -5,7 +5,9 @@ include "view/header.php";
 ?>
 
 <main>
-    Page Content
+    Home page.
+    Top books list.
+    Random author feature?
 </main>
 
 
