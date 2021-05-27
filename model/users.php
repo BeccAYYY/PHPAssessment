@@ -25,37 +25,61 @@ class users {
         $this->Role=$this->test_input($Role);
     }
 
+//Function to check if the username already exists in the database.
+function check_username($pdo, $Username) {
+    $query = "SELECT COUNT(*) FROM users WHERE Username='" . $Username . "'";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row["COUNT(*)"];
+}
+
     Private $columns = [];
     Private $errors = [];
 
 //Validation for each form field, which adds it to the $columns array if it is validated and not null and adds one error for each field to the $errors array if one exists.
-    public function validate() {
+    public function validate($pdo) {
         if ($this->Username == "") {
-            $this->errors += ["Username" => "Username is required"];
+            $this->errors[] = "UsernameErr:Username is required";
         } elseif (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $this->Username)) {
-            $this->errors  += ["Username" => "Username cannot contain special characters."];
+            $this->errors[] = "UsernameErr:Username cannot contain special characters.";
         } elseif (strlen($this->Username) > 40 or strlen($this->Username) < 3) {
-            $this->errors += ["Username" => "Please enter a username between 3 and 20 characters long."];
-        }  else {
+            $this->errors[] = "UsernameErr:Please enter a username between 3 and 20 characters long.";
+        } elseif ($this->check_username($pdo, $this->Username) > 0) {
+            $this->errors[] = "UsernameErr:That username is already in use.";
+        } else {
             $this->columns[] = "Username";
         } 
         
-        if ($this->FirstName !== "") {
+        if (!preg_match('/^[a-z]*$/i', $this->FirstName )) {
+            $this->errors[] = "FirstNameErr:First name should contain only letters.";
+        } elseif ($this->FirstName !== "") {
             $this->columns[] = "FirstName";
-        } 
+        }
         
-        if ($this->LastName !== "") {
+        if (!preg_match('/^[a-z]*$/i', $this->LastName )) {
+            $this->errors[] = "LastNameErr:Last name should contain only letters.";
+        } elseif ($this->LastName !== "") {
             $this->columns[] = "LastName";
         } 
         
-        if ($this->Password !== "") {
+        if ($this->Password == "") {
+            $this->errors[] = "PasswordErr:Please enter a password";
+        } elseif (strlen($this->Password) < 8 || !preg_match('@[0-9]@', $this->Password) || !preg_match('@[A-Z]@', $this->Password) || !preg_match('@[a-z]@', $this->Password)) {
+            $this->errors[] = "PasswordErr:Please enter a password that is at least 8 characters long, contains one uppercase and one lowercase character and one number.";
+        } elseif ($this->Password !== "") {
             $this->columns[] = "Password";
+            $this->Password = password_hash($this->Password, PASSWORD_DEFAULT);
         } 
         
-        if ($this->Role !== "") {
+        if ($this->Role == "Admin" || $this->Role == "User") {
             $this->columns[] = "Role";
+        } else {
+            $this->errors[] = "RoleErr:You have not selected a valid option.";
         }
+        return $this->errors;
     }
+
 
 
 //Function that outputs the list for the columns section of the SQL INSERT statement
@@ -90,7 +114,7 @@ class users {
     
 
 //The function to run the insert query after the previous function has got the information.
-    public function insert_user($pdo) {
+    function insert_user($pdo) {
         $query = "INSERT INTO users (" . $this->columns($this->columns) . ") VALUES (" . $this->values($this->columns). ")";
         $stmt = $pdo->prepare($query);
         foreach($this->columns as $v) {
@@ -100,7 +124,7 @@ class users {
     }
 
 //Function to search for a user by the primary key; Username.
-    public function search_user_by_username($pdo, $Username) {
+    function search_user_by_username($pdo, $Username) {
         $query = "SELECT * FROM users WHERE Username=?";
         $stmt = $pdo->prepare($query);
         $stmt->execute(array($Username));

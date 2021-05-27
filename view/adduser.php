@@ -2,6 +2,14 @@
 $root_path = "../";
 $page_title = "Add User";
 include "header.php";
+$errors = [];
+if (!empty($_GET)) {
+    $error_msgs = explode("|", $_GET["msg"]);
+    foreach ($error_msgs as $value) {
+        $error_item = explode(":", $value);
+        $errors += [$error_item[0] => $error_item[1]];
+    }
+}
 ?>
 
 <main class="container row m-auto pt-2">
@@ -12,23 +20,47 @@ include "header.php";
             <div class="mb-3">
                 <label for="Username" class="form-label required">Username</label>
                 <input type="text" class="form-control" id="Username" name="Username">
+                <?php if (isset($errors["UsernameErr"])) {
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                    <?php echo $errors["UsernameErr"] ?>
+                    </div>
+                <?php } ?>
             </div>
             <div class="mb-3">
                 <label for="Password" class="form-label required">Password</label>
-                <input type="password" id="Password" class="form-control"   aria-describedby="passwordHelpBlock" name="Password" required>
+                <input type="password" id="Password" class="form-control"   aria-describedby="passwordHelpBlock" name="Password">
                 <div id="passwordHelpBlock" class="form-text">
                     Your password must be 8-20 characters long, contain letters and numbers, and must not   contain spaces, special characters,   or emoji.
                 </div>
+                <?php if (isset($errors["PasswordErr"])) {
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                    <?php echo $errors["PasswordErr"] ?>
+                    </div>
+                <?php } ?>
             </div>
 
             <div class="mb-3 row">
                 <div class="col-12 col-md-6">
                     <label for="FirstName" class="form-label">First Name</label>
                     <input type="text" class="form-control" id="FirstName" name="FirstName">
+                    <?php if (isset($errors["FirstNameErr"])) {
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                    <?php echo $errors["FirstNameErr"] ?>
+                    </div>
+                <?php } ?>
                 </div>
                 <div class="col-12 col-md-6">
                     <label for="LastName" class="form-label">Last Name</label>
                     <input type="text" class="form-control" id="LastName" name="LastName">
+                    <?php if (isset($errors["LastNameErr"])) {
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                    <?php echo $errors["LastNameErr"] ?>
+                    </div>
+                <?php } ?>
                 </div>
             </div>
             <div class="d-flex justify-content-between">
@@ -41,6 +73,12 @@ include "header.php";
                         <input class="form-check-input" type="radio" name="Role" id="User" value="User"     checked>
                         <label class="form-check-label" for="User">User</label>
                     </div>
+                    <?php if (isset($errors["RoleErr"])) {
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                    <?php echo $errors["RoleErr"] ?>
+                    </div>
+                <?php } ?>
                 </div>
                 <div>
                     <button type="submit" class="btn btn-primary">Create</button>

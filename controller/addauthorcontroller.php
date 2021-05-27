@@ -17,8 +17,8 @@ $author = new authors;
         }
         $author->get_information($Name, $Bio, $BirthYear, $DeathYear, $image_path);
         $author->insert_author($pdo);
-        //header("location:../view/addauthor.php?msg=Saved");
+        header("location:../view/addauthor.php?msg=Saved");
     } catch (exception $e) {
-        //header("location:../view/addauthor.php?msg=" . $e->getMessage());
+        header("location:../view/addauthor.php?msg=" . $e->getMessage());
     }
 ?>
