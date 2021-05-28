@@ -10,9 +10,13 @@ $user = new users;
         $user->get_information($Username, $FirstName, $LastName, $Password, $Role);
         $errors = [];
         $errors = $user->validate($pdo);
+        if (!empty($errors)) {
         $msg = implode("|", $errors);
-        $user->insert_user($pdo);
         header("location:../view/adduser.php?msg=$msg");
+        } else {
+        $user->insert_user($pdo);
+        header("location:../view/adduser.php?m=Saved");
+        }
     } catch (exception $e) {
         //header("location:../view/addbook.php?msg=" . $e->getMessage());
     }

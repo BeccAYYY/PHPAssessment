@@ -1,3 +1,5 @@
+<?php session_start() ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +9,7 @@
     <title><?php echo $page_title; ?> - Books</title>
     <link rel="stylesheet" href="<?php echo $root_path . "view/css/style.css" ?>">
     <script src="<?php echo $root_path . "view/node_modules/bootstrap/dist/js/bootstrap.bundle.js" ?>" defer></script>
+    <script src="<?php echo $root_path . "view/js/js.js" ?>" defer></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary p-3">

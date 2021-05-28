@@ -3,12 +3,19 @@ $root_path = "../";
 $page_title = "Add User";
 include "header.php";
 $errors = [];
-if (!empty($_GET)) {
+if (isset($_GET["msg"])) {
     $error_msgs = explode("|", $_GET["msg"]);
     foreach ($error_msgs as $value) {
         $error_item = explode(":", $value);
         $errors += [$error_item[0] => $error_item[1]];
     }
+}
+if (isset($_GET["m"])) {
+    ?>
+    <div class="alert alert-success" role="alert" onclick="dismiss(this)">
+    This user has been added successfully.
+    </div>
+    <?php
 }
 ?>
 
@@ -22,7 +29,7 @@ if (!empty($_GET)) {
                 <input type="text" class="form-control" id="Username" name="Username">
                 <?php if (isset($errors["UsernameErr"])) {
                     ?>
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger" role="alert" onclick="dismiss(this)">
                     <?php echo $errors["UsernameErr"] ?>
                     </div>
                 <?php } ?>
@@ -35,7 +42,7 @@ if (!empty($_GET)) {
                 </div>
                 <?php if (isset($errors["PasswordErr"])) {
                     ?>
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger" role="alert" onclick="dismiss(this)">
                     <?php echo $errors["PasswordErr"] ?>
                     </div>
                 <?php } ?>
@@ -47,7 +54,7 @@ if (!empty($_GET)) {
                     <input type="text" class="form-control" id="FirstName" name="FirstName">
                     <?php if (isset($errors["FirstNameErr"])) {
                     ?>
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger" role="alert" onclick="dismiss(this)">
                     <?php echo $errors["FirstNameErr"] ?>
                     </div>
                 <?php } ?>
@@ -57,7 +64,7 @@ if (!empty($_GET)) {
                     <input type="text" class="form-control" id="LastName" name="LastName">
                     <?php if (isset($errors["LastNameErr"])) {
                     ?>
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger" role="alert" onclick="dismiss(this)">
                     <?php echo $errors["LastNameErr"] ?>
                     </div>
                 <?php } ?>
@@ -75,7 +82,7 @@ if (!empty($_GET)) {
                     </div>
                     <?php if (isset($errors["RoleErr"])) {
                     ?>
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger" role="alert" onclick="dismiss(this)">
                     <?php echo $errors["RoleErr"] ?>
                     </div>
                 <?php } ?>

@@ -131,4 +131,13 @@ function check_username($pdo, $Username) {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
+
+//Function to get all users from users table
+function get_all_users($pdo) {
+    $query = "SELECT * FROM users";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $row;
+}
 }
