@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $page_title; ?> - Books</title>
     <link rel="stylesheet" href="<?php echo $root_path . "view/css/style.css" ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="<?php echo $root_path . "view/node_modules/bootstrap/dist/js/bootstrap.bundle.js" ?>" defer></script>
     <script src="<?php echo $root_path . "view/js/js.js" ?>" defer></script>
 </head>

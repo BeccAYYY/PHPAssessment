@@ -12,7 +12,7 @@ include "../controller/usersdisplaycontroller.php";
 foreach ($row as $v) {
     ?>
     <div class="col-12 col-md-6 col-lg-4 border p-3">
-        <a class="h4" href="singleuserview.php?username=<?php echo $v["Username"] ?>"><p><?php echo $v["Username"]; ?></p></a>
+        <a class="h4" href="singleuserview.php?id=<?php echo $v["UserID"] ?>"><p><?php echo $v["Username"]; ?></p></a>
         <p><b>Name: </b><?php  
         if (!empty($v["FirstName"]) && !empty($v["LastName"])) {
             echo $v["FirstName"] . " " . $v["LastName"]; 
