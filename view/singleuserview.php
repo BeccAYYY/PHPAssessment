@@ -74,7 +74,7 @@ if (isset($_GET["msg"])) {
 
 
 
-<div id="edit-overlay" onclick="dismiss(this), exitEditForm()">
+<div id="edit-overlay" onclick="exitEditForm()">
 </div>
 <div id="edit-box" class="border rounded py-3 p-1 px-sm-2 px-md-3 p-lg-5 text-center">
 
@@ -129,6 +129,17 @@ if (isset($_GET["msg"])) {
                 <input type="submit" class="btn btn-primary text-white d-inline">
             </form>
         </div>
+
+        <div id="delete-confirm" class="edit-form">
+            <p>Are you sure you wish to delete <?php echo $userdetails["Username"] ?>?</p>
+            <form id="delete-confirmation-form" action="../controller/editusercontroller.php" method="POST">
+                <input type="hidden" value="<?php echo $userdetails["UserID"]; ?>" name="UserID">
+                <input type="submit" class="btn btn-primary text-white d-inline" name="Delete" value="Delete">
+                <div class="btn btn-primary text-white d-inline" id="delete-cancel" onclick="exitEditForm()">Cancel</div>
+            </form>
+        </div>
+
+
     </div>
 
 <?php

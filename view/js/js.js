@@ -11,6 +11,8 @@ function exitEditForm() {
     document.getElementById("name-edit").style = "display: none;";
     document.getElementById("role-edit").style = "display: none;";
     document.getElementById("password-edit").style = "display: none;";
+    document.getElementById("delete-confirm").style = "display: none;";
+    document.getElementById("edit-overlay").style = "display: none;";
 }
 
 function editBox(e) {
@@ -24,5 +26,7 @@ function editBox(e) {
         document.getElementById("role-edit").style = "display: block;"
     } else if (e.id == "password-btn") {
         document.getElementById("password-edit").style = "display: block;"
+    } else if (e.id == "delete-btn") {
+        document.getElementById("delete-confirm").style = "display: block;"
     }
 }

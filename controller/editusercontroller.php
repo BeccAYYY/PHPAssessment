@@ -16,6 +16,10 @@ try {
         $error = $user->update_role($pdo, $_POST["Role"], $id);
     } elseif (isset($_POST["Password"])) {
         $error = $user->update_password($pdo, $_POST["CurrentPassword"], $_POST["Password"], $_POST["Password2"], $id);
+    } elseif (isset($_POST["Delete"])) {
+        $user->delete_user($pdo, $id);
+        header("location:../view/usersdisplay.php?msg=UserDeleted");
+        exit();
     }
     if (!empty($error)) {
     $msg = $error;

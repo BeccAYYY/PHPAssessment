@@ -134,7 +134,7 @@ function check_username($pdo, $Username) {
 
 //Function to get all users from users table
     function get_all_users($pdo) {
-        $query = "SELECT * FROM users";
+        $query = "SELECT * FROM users WHERE Role != 'Deleted'";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -208,5 +208,11 @@ function check_username($pdo, $Username) {
             $stmt->execute();
         }
         return $errors;
+    }
+
+    function delete_user($pdo, $UserID) {
+        $query = "UPDATE users SET Role = 'Deleted', Username = 'Deleted User', FirstName = NULL, LastName = NULL, Password = '' WHERE UserID = $UserID;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
     }
 }

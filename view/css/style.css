@@ -11538,4 +11538,8 @@ footer {
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
+
+#delete-cancel {
+  padding: 8px 12px;
+}
 /*# sourceMappingURL=style.css.map */

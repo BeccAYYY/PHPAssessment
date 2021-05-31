@@ -3,6 +3,15 @@ $root_path = "../";
 $page_title = "Users";
 include "header.php";
 include "../controller/usersdisplaycontroller.php";
+
+    if (isset($_GET["msg"])) { 
+        if ($_GET["msg"] = "UserDeleted") {?>
+    <div class="alert alert-success" role="alert" onclick="dismiss(this)">
+        <p class="m-0">User deleted successfully.</p>
+    </div>
+    <?php
+        }
+    }
 ?>
 <div class="container row m-auto my-5">
 
