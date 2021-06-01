@@ -42,3 +42,18 @@ function editBox(e) {
         document.getElementById("delete-confirm").style = "display: block;"
     }
 }
+
+function bookFormSelector() {
+    if (document.getElementById("select-option").selected) {
+        document.getElementById("book-form").style = "display: none;";
+        document.getElementById("author-form").style = "display: none;";
+    } else if (document.getElementById("new-option").selected) {
+        document.getElementById("book-form").style = "display: none;";
+        document.getElementById("author-form").style = "display: block;";
+    } else {
+        document.getElementById("book-form").style = "display: block;";
+        document.getElementById("author-form").style = "display: none;";
+    }
+}
+
+bookFormSelector();

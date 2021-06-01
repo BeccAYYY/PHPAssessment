@@ -87,3 +87,15 @@ footer {
 .navbar-nav .dropdown-menu {
     position: absolute;
 }
+
+#Deceased:not(:checked) ~ #DeathYear {
+    display: none;
+}
+
+#book-form {
+    display: none;
+}
+
+#author-form {
+    display: none;
+} 

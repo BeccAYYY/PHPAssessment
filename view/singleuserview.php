@@ -67,12 +67,10 @@ if (isset($_GET["msg"])) {
         <div class="btn btn-primary text-white m-3" id="password-btn" onclick="editBox(this)">
             <p class="m-0">Change Password</p>
         </div>
-        <?php }
-        if ($sRole == "Admin") { ?>
+        <?php } ?>
         <div class="btn btn-primary text-white m-3" id="delete-btn" onclick="editBox(this)">
             <p class="m-0">Delete User</p>
         </div>
-        <?php } ?>
         </div>
     </div>
 </div>
@@ -138,8 +136,7 @@ if (isset($_GET["msg"])) {
                 <input type="submit" class="btn btn-primary text-white d-inline">
             </form>
         </div>
-        <?php }
-        if ($sRole == "Admin") { ?>
+        <?php } ?>
         <div id="delete-confirm" class="edit-form">
             <p>Are you sure you wish to delete <?php echo $userdetails["Username"] ?>?</p>
             <form id="delete-confirmation-form" action="../controller/editusercontroller.php" method="POST">
@@ -148,8 +145,6 @@ if (isset($_GET["msg"])) {
                 <div class="btn btn-primary text-white d-inline" id="delete-cancel" onclick="exitEditForm()">Cancel</div>
             </form>
         </div>
-        <?php } ?>
-
     </div>
 
 <?php

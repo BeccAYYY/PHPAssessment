@@ -23,8 +23,8 @@ class books {
     }
 
 //The function to run the insert query after the previous function has got the information.
-    public function insert_books($pdo) {
-        $query="INSERT INTO books (Title, AuthorID, PublishedYear, ImagePath, CopiesSold, Summary) VALUES (:t, :aid, :py, :ip, :cs, :s)"
+    public function insert_book($pdo) {
+        $query="INSERT INTO books (Title, AuthorID, PublishedYear, ImagePath, CopiesSold, Summary) VALUES (:t, :aid, :py, :ip, :cs, :s)";
         $stmt=$pdo->prepare($query);
         $stmt->bindParam(":t", $this->Title);
         $stmt->bindParam(":aid", $this->AuthorID);

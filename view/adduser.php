@@ -27,8 +27,7 @@ if (isset($_GET["m"])) {
 <main class="container row m-auto pt-2">
     <div class="col-12 col-lg-6 m-auto">
         <h3 class="text-primary pb-0 pb-md-0 p-md-5 p-3">Add a new user</h3>
-        <form action="../controller/addusercontroller.php" method="POST" enctype="multipart/form-data"  class="container p-md-5 pb-md-5 pt-2 pt-md-3 pb-3 p-2">
-
+        <form action="../controller/addusercontroller.php" method="POST" enctype="multipart/form-data" class="container p-md-5 pb-md-5 pt-2 pt-md-3 pb-3 p-2">
             <div class="mb-3">
                 <label for="Username" class="form-label required">Username</label>
                 <input type="text" class="form-control" id="Username" name="Username">
