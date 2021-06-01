@@ -11492,6 +11492,10 @@ footer {
   padding: 20px;
 }
 
+.fa-pen-square {
+  display: none;
+}
+
 .fa-pen-square:hover {
   color: #3b1a1a;
   -webkit-transform: scale(1.2);

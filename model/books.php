@@ -10,7 +10,6 @@ class books {
     Private $Summary;
     Private $Clicks;
     Private $EntryCreated;
-    Private $EntryLastUpdated;
 
 //Data here comes from the form. "$this" refers to the current class. The variables in the brackets are parameters for this functions that will be fed in later.
     public function get_information($Title, $AuthorID, $PublishedYear, $ImagePath, $CopiesSold, $Summary) {

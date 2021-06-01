@@ -2,7 +2,7 @@
 $root_path = "../";
 $page_title = "Add Book";
 include "header.php";
-include "../controller/addbookviewcontroller.php";
+include "../controller/authorsdisplaycontroller.php";
 
 if ($sRole !== "Admin" && $sRole !== "User") {
     header("location:../index.php?msg=unauthorised");
@@ -46,11 +46,11 @@ if (isset($_GET["authorMsg"])) {
 
                 <div class="form-group mb-3">
                     <label for="PublishedYear" class="form-label">Year Published</label>
-                    <input type="text" name="PublishedYear" class="form-control">
+                    <input type="number" name="PublishedYear" class="form-control">
                 </div>
                 <div class="form-group mb-3">
                     <label for="Image" class="form-label">Cover Photo</label>
-                    <input type="file" name="Image" class="form-control">
+                    <input type="file" name="ImagePath" class="form-control">
                 </div>
                 <div class="form-group mb-3">
                     <label for="CopiesSold" class="form-label">Copies Sold</label>
