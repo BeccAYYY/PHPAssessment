@@ -185,6 +185,14 @@ function check_username($pdo, $Username) {
         return $errors;
     }
 
+    function get_userid_from_username($pdo, $Username) {
+        $query = "SELECT UserID FROM users WHERE Username=?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute(array($Username));
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
+    }
+    
     function check_password($pdo, $Password, $UserID) {
         $row = $this->search_user_by_id($pdo, $UserID);
         $hash = $row["Password"];

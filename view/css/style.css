@@ -11542,4 +11542,13 @@ footer {
 #delete-cancel {
   padding: 8px 12px;
 }
+
+.dropdown-menu[data-bs-popper] {
+  right: 0;
+  left: unset;
+}
+
+.navbar-nav .dropdown-menu {
+  position: absolute;
+}
 /*# sourceMappingURL=style.css.map */

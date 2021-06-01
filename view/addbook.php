@@ -2,6 +2,11 @@
 $root_path = "../";
 $page_title = "Add Book";
 include "header.php";
+
+if ($sRole !== "Admin" && $sRole !== "User") {
+    header("location:../index.php?msg=unauthorised");
+}
+
 ?>
 
 <main>

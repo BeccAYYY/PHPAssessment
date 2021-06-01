@@ -2,8 +2,12 @@
 $root_path = "../";
 $page_title = "Add Author";
 include "header.php";
-?>
 
+if ($sRole !== "Admin" && $sRole !== "User") {
+    header("location:../index.php?msg=unauthorised");
+}
+
+?>
 <main>
     <form action="../controller/addauthorcontroller.php" method="POST" enctype="multipart/form-data">
         <fieldset>

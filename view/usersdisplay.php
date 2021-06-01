@@ -4,6 +4,9 @@ $page_title = "Users";
 include "header.php";
 include "../controller/usersdisplaycontroller.php";
 
+if ($sRole !== "Admin") {
+    header("location:../index.php?msg=unauthorised");
+}
     if (isset($_GET["msg"])) { 
         if ($_GET["msg"] = "UserDeleted") {?>
     <div class="alert alert-success" role="alert" onclick="dismiss(this)">

@@ -1,4 +1,15 @@
-<?php session_start() ?>
+<?php session_start(); 
+$sRole = "";
+$sUserID = "";
+$sUsername = "";
+    if (isset($_SESSION)) {
+        if (isset($_SESSION["UserID"])) {
+            $sRole = $_SESSION["Role"];
+            $sUserID = $_SESSION["UserID"];
+            $sUsername = $_SESSION["Username"];
+        }
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,9 +41,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo $root_path . "view/authorsdisplay.php" ?>">Authors</a>
                     </li>
+                <?php
+                    if ($sRole == "Admin") { ?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo $root_path . "view/usersdisplay.php" ?>">Users</a>
                     </li>
+                    <?php } 
+                    if ($sRole == "Admin" || $sRole == "User") {?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Manage Site
@@ -40,15 +55,40 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="<?php echo $root_path . "view/addbook.php" ?>">Add Book</a></li>
                             <li><a class="dropdown-item" href="<?php echo $root_path . "view/addauthor.php" ?>">Add Author</a></li>
+                        <?php }
+                        if ($sRole == "Admin") { ?>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="<?php echo $root_path . "view/adduser.php" ?>">Add User</a></li>
+                        <?php } ?>
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex">
+                <div class="row align-items-start">
+                <form class="d-flex col-10">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-light" type="submit">Search</button>
                 </form>
+                <ul class="navbar-nav col-2">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <?php if (empty($sUserID)) { ?>
+                            <li><a class="dropdown-item" href="<?php echo $root_path . "view/login.php" ?>">Log In</a></li>
+                            <?php } else { ?>
+                            <li><a class="dropdown-item" href="<?php echo $root_path . "view/singleuserview.php?id=$sUserID" ?>">View Profile</a></li>
+                            <li><a class="dropdown-item" href="<?php echo $root_path . "controller/logoutcontroller.php" ?>">Log Out</a></li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                </ul>
+                </div>
+
+
+                    
             </div>
         </div>
     </nav>

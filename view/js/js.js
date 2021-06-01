@@ -2,17 +2,29 @@ function dismiss(e) {
     e.style = "display: none;";
 }
 function exitEditForm() {
-    document.getElementById("username-edit-form").reset();
-    document.getElementById("name-edit-form").reset();
-    document.getElementById("role-edit-form").reset();
-    document.getElementById("password-edit-form").reset();
+
     document.getElementById("edit-box").style = "display: none;";
-    document.getElementById("username-edit").style = "display: none;";
-    document.getElementById("name-edit").style = "display: none;";
-    document.getElementById("role-edit").style = "display: none;";
-    document.getElementById("password-edit").style = "display: none;";
-    document.getElementById("delete-confirm").style = "display: none;";
     document.getElementById("edit-overlay").style = "display: none;";
+
+    if (document.getElementById("username-edit-form")) {
+        document.getElementById("username-edit-form").reset();
+    } if (document.getElementById("name-edit-form")) {
+        document.getElementById("name-edit-form").reset();
+    } if (document.getElementById("role-edit-form")) {
+        document.getElementById("role-edit-form").reset();
+    } if (document.getElementById("password-edit-form")) {  
+        document.getElementById("password-edit-form").reset();
+    } if (document.getElementById("username-edit")) {    
+        document.getElementById("username-edit").style = "display: none;";
+    } if (document.getElementById("name-edit")) {    
+        document.getElementById("name-edit").style = "display: none;";
+    } if (document.getElementById("role-edit")) {    
+        document.getElementById("role-edit").style = "display: none;";
+    } if (document.getElementById("password-edit")) {    
+        document.getElementById("password-edit").style = "display: none;";
+    } if (document.getElementById("delete-confirm")) {
+        document.getElementById("delete-confirm").style = "display: none;";
+    }
 }
 
 function editBox(e) {

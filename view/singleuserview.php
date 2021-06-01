@@ -4,6 +4,9 @@ $page_title = "Users";
 include "header.php";
 include "../controller/usersdisplaycontroller.php";
 
+if ($sRole !== "Admin" && $sUserID !== $userdetails["UserID"]) {
+    header("location:../index.php?msg=unauthorised");
+}
 
 if (isset($_GET["msg"])) {
     $error_item = explode(":", $_GET["msg"]);
@@ -22,13 +25,13 @@ if (isset($_GET["msg"])) {
 ?>
 <div class="container pt-3">
     <?php 
-        // if ($_SESSION["admin"])  
+        if ($sRole == "Admin")  {
             ?>
     <div>
         <p><a href="usersdisplay.php">&laquo; Back to all users</a></p>
     </div>
     <?php
-        //  
+        } 
     ?>
 
 
@@ -51,22 +54,26 @@ if (isset($_GET["msg"])) {
             ?></p>
             <i class="fas fa-pen-square position-absolute fs-5"></i>
         </div>
-
+        <?php if ($sRole == "Admin") { ?>
         <div id="role-div" class="editable-div position-relative p-2 rounded" onclick="editBox(this)">
             <p class="m-0"><b>Role: </b><?php echo $userdetails["Role"]; ?></p>
             <i class="fas fa-pen-square position-absolute fs-5"></i>
         </div>
+        <?php } ?>
         <div class="p-2">
             <p class="text-muted small m-0"><b>Created: </b><?php echo $userdetails["CreatedDate"]; ?></p>
         </div>
+    <?php if ($sUserID == $userdetails["UserID"]) { ?>
         <div class="btn btn-primary text-white m-3" id="password-btn" onclick="editBox(this)">
             <p class="m-0">Change Password</p>
         </div>
+        <?php }
+        if ($sRole == "Admin") { ?>
         <div class="btn btn-primary text-white m-3" id="delete-btn" onclick="editBox(this)">
             <p class="m-0">Delete User</p>
         </div>
+        <?php } ?>
         </div>
-
     </div>
 </div>
 
@@ -100,6 +107,7 @@ if (isset($_GET["msg"])) {
             </form>
         </div>
 
+        <?php if ($sRole == "Admin") { ?>
         <div id="role-edit" class="edit-form">Edit Role
             <form id="role-edit-form" action="../controller/editusercontroller.php" method="POST">
             <div class="form-check form-check-inline">
@@ -114,7 +122,8 @@ if (isset($_GET["msg"])) {
                 <input type="submit" class="btn btn-primary text-white d-inline">
             </form>
         </div>
-
+        <?php }
+        if ($sRole == "User") { ?>
         <div id="password-edit" class="edit-form">Edit Password
             <form id="password-edit-form" action="../controller/editusercontroller.php" method="POST">
                 <div class="text-start">
@@ -129,7 +138,8 @@ if (isset($_GET["msg"])) {
                 <input type="submit" class="btn btn-primary text-white d-inline">
             </form>
         </div>
-
+        <?php }
+        if ($sRole == "Admin") { ?>
         <div id="delete-confirm" class="edit-form">
             <p>Are you sure you wish to delete <?php echo $userdetails["Username"] ?>?</p>
             <form id="delete-confirmation-form" action="../controller/editusercontroller.php" method="POST">
@@ -138,7 +148,7 @@ if (isset($_GET["msg"])) {
                 <div class="btn btn-primary text-white d-inline" id="delete-cancel" onclick="exitEditForm()">Cancel</div>
             </form>
         </div>
-
+        <?php } ?>
 
     </div>
 

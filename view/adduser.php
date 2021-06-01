@@ -2,6 +2,11 @@
 $root_path = "../";
 $page_title = "Add User";
 include "header.php";
+
+if ($sRole !== "Admin") {
+    header("location:../index.php?msg=unauthorised");
+}
+
 $errors = [];
 if (isset($_GET["msg"])) {
     $error_msgs = explode("|", $_GET["msg"]);
@@ -13,7 +18,7 @@ if (isset($_GET["msg"])) {
 if (isset($_GET["m"])) {
     ?>
     <div class="alert alert-success" role="alert" onclick="dismiss(this)">
-    This user has been added successfully.
+        This user has been added successfully.
     </div>
     <?php
 }
@@ -38,7 +43,7 @@ if (isset($_GET["m"])) {
                 <label for="Password" class="form-label required">Password</label>
                 <input type="password" id="Password" class="form-control"   aria-describedby="passwordHelpBlock" name="Password">
                 <div id="passwordHelpBlock" class="form-text">
-                    Your password must be 8-20 characters long, contain letters and numbers, and must not   contain spaces, special characters,   or emoji.
+                    Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters,   or emoji.
                 </div>
                 <?php if (isset($errors["PasswordErr"])) {
                     ?>
