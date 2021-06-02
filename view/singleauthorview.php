@@ -8,7 +8,7 @@ if (isset($_GET["msg"])) {
     $error_item = explode(":", $_GET["msg"]);
 ?>
     <div class="alert alert-danger" role="alert" onclick="dismiss(this)">
-        <p><?php echo "Cannot update $error_item[0]: $error_item[1]"; ?></p>
+        <p class="m-0"><?php echo "Cannot update $error_item[0]: $error_item[1]"; ?></p>
     </div>
 <?php
     }
@@ -66,6 +66,11 @@ if (isset($_GET["msg"])) {
 
         <div class="p-2">
             <p class="text-muted small m-0"><b>Created: </b><?php echo $authordetails["CreatedDate"]; ?></p>
+        </div>
+
+
+        <div class="btn btn-primary text-white m-3" id="delete-btn" onclick="editBox(this)">
+            <p class="m-0">Delete Author</p>
         </div>
     </div>
 </div>
@@ -132,9 +137,10 @@ if (isset($_GET["msg"])) {
         
         <?php } ?>
         <div id="delete-confirm" class="edit-form">
-            <p>Are you sure you wish to delete <?php echo $userdetails["Username"] ?>?</p>
-            <form id="delete-confirmation-form" action="../controller/editusercontroller.php" method="POST">
-                <input type="hidden" value="<?php echo $userdetails["UserID"]; ?>" name="UserID">
+            <p>Are you sure you wish to delete <?php echo $authordetails["Name"] ?>?</p>
+            <p>This will also delete all of their books.</p>
+            <form id="delete-confirmation-form" action="../controller/editauthorcontroller.php" method="POST">
+                <input type="hidden" value="<?php echo $authordetails["AuthorID"]; ?>" name="AuthorID">
                 <input type="submit" class="btn btn-primary text-white d-inline" name="Delete" value="Delete">
                 <div class="btn btn-primary text-white d-inline" id="delete-cancel" onclick="exitEditForm()">Cancel</div>
             </form>

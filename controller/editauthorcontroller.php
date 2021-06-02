@@ -1,10 +1,14 @@
 <?php
 include "../model/connection.php";
 include "../model/authors.php";
+include "../model/books.php";
+include "../model/logs.php";
 extract($_POST);
 $conn = new connection;
 $pdo = $conn->connect_db();
 $author = new authors;
+$book = new books;
+$log = new logs;
 
 try {
     $id = $_POST["AuthorID"];
@@ -29,7 +33,10 @@ try {
     } elseif (isset($_POST["Bio"])) {
         $error = $author->update_bio($pdo, $_POST["Bio"], $id);
     } elseif (isset($_POST["Delete"])) {
-        $user->delete_user($pdo, $id);
+        $book->delete_authors_books($pdo, $id);
+        $log->delete_authors_logs($pdo, $id);
+        $author->delete_author($pdo, $id);
+
         header("location:../view/authorsdisplay.php?msg=UserDeleted");
         exit();
     }

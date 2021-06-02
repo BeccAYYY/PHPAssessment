@@ -2,7 +2,16 @@
 $root_path = "../";
 $page_title = "Authors";
 include "header.php";
-include "../controller/authorsdisplaycontroller.php"
+include "../controller/authorsdisplaycontroller.php";
+
+if (isset($_GET["msg"])) { 
+    if ($_GET["msg"] = "UserDeleted") {?>
+<div class="alert alert-success" role="alert" onclick="dismiss(this)">
+    <p class="m-0">Author deleted successfully.</p>
+</div>
+<?php
+    }
+}
 ?>
 
 <div class="container row m-auto my-5">

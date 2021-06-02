@@ -135,6 +135,12 @@ function test_input($data) {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
+
+    public function delete_authors_books($pdo, $AuthorID) {
+        $query = "DELETE FROM books WHERE AuthorID = $AuthorID";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+    }
 }
 
 

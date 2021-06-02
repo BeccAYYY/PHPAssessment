@@ -194,11 +194,17 @@ function test_input($data) {
         if (strlen($Bio) > 400) {
             $errors = "Bio:The Bio should be below 400 characters.";
         } else {
-        $query = "UPDATE authors SET Bio = '$Bio' WHERE AuthorID = $AuthorID;";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute();
+            $query = "UPDATE authors SET Bio = '$Bio' WHERE AuthorID = $AuthorID;";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
         }
         return $errors;
+    }
+
+    function delete_author($pdo, $AuthorID) {
+        $query = "DELETE FROM authors WHERE AuthorID = $AuthorID;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
     }
     
 }
