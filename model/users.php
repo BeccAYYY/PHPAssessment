@@ -142,7 +142,7 @@ function check_username($pdo, $Username) {
     }
 
     function update_username($pdo, $Username, $UserID) {
-        $this->test_input($Username);
+        $Username = $this->test_input($Username);
         $errors = "";
         if ($Username == "") {
             $errors = "Username:Username cannot be empty";
@@ -161,8 +161,8 @@ function check_username($pdo, $Username) {
     }
 
     function update_name($pdo, $FirstName, $LastName, $UserID) {
-        $this->test_input($FirstName);
-        $this->test_input($LastName);
+        $FirstName = $this->test_input($FirstName);
+        $LastName = $this->test_input($LastName);
         if (!preg_match('/^[a-z]*$/i', $FirstName) || !preg_match('/^[a-z]*$/i', $LastName)) {
             $errors = "Name:Names should contain only letters.";
         } else {
@@ -174,7 +174,7 @@ function check_username($pdo, $Username) {
     }
 
     function update_role($pdo, $Role, $UserID) {
-        $this->test_input($Role);
+        $Role = $this->test_input($Role);
         if (!($Role == "Admin" || $Role == "User")) {
             $errors = "Role:You have not selected a valid option.";
         } else {
@@ -200,7 +200,7 @@ function check_username($pdo, $Username) {
     }
 
     function update_password($pdo, $CurrentPassword, $Password, $Password2, $UserID) {
-        $this->test_input($Password);
+        $Password = $this->test_input($Password);
         if (! $this->check_password($pdo, $CurrentPassword, $UserID)) {
             $errors = "Password:Your details are incorrect.";
         } elseif ($Password !== $Password2) {

@@ -25,7 +25,7 @@ if (isset($_GET["msg"])) {
     </div>
 
 
-    <div class="m-auto col-12 col-lg-6 border bg-light p-3 d-flex flex-column align-items-center">
+    <div class="m-auto col-12 col-lg-6 border bg-light p-3 d-flex flex-column align-items-center mb-5">
 
         <div id="name-div" class="<?php if ($sRole == "User" || $sRole == "Admin") echo "editable-div"; ?> position-relative rounded" <?php if ($sRole == "User" || $sRole == "Admin") echo 'onclick="editBox(this)"'; ?>>
             <h2 class="text-primary text-center p-2"><?php echo $authordetails["Name"]; ?></h2>
@@ -109,6 +109,7 @@ if (isset($_GET["msg"])) {
 
         <?php if ($sRole == "Admin") { ?>
         <div id="image-edit" class="edit-form">
+        <form id="image-edit-form" action="../controller/editauthorcontroller.php" method="POST" enctype="multipart/form-data">
             <label>Edit Image</label>
             <form id="image-edit-form" action="../controller/editauthorcontroller.php" method="POST">
                 <input type="file" name="ImagePath" class="form-control my-3">

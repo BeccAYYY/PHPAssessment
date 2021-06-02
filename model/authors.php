@@ -42,8 +42,8 @@ function test_input($data) {
             $this->columns[] = "Name";
         } 
         
-        if (strlen($this->Bio) > 255) {
-            $this->errors[] = "BioErr:The Bio should be below 200 characters.";
+        if (strlen($this->Bio) > 400) {
+            $this->errors[] = "BioErr:The Bio should be below 400 characters.";
         } elseif ($this->Bio !== "") {
             $this->columns[] = "Bio";
         } 
@@ -134,4 +134,71 @@ function test_input($data) {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row["MAX(AuthorID)"];
     }
+
+    function update_name($pdo, $Name, $AuthorID) {
+        $Name = $this->test_input($Name);
+        $errors = "";
+        if ($Name == "") {
+            $errors = "Name:Name is required";
+        } elseif (preg_match('/[\^£$%&*()}{@#~?><>,|=_+¬]/', $Name)) {
+            $errors = "Name:Name cannot contain special characters.";
+        } elseif (strlen($Name) > 40 or strlen($Name) < 3) {
+            $errors = "Name:Please enter a name between 3 and 40 characters long.";
+        }  else {
+        $query = "UPDATE authors SET Name = '$Name' WHERE AuthorID = $AuthorID;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        }
+        return $errors;
+    }
+
+    function update_birth($pdo, $BirthYear, $DeathYear, $Deceased, $AuthorID) {
+        $BirthYear = intval($this->test_input($BirthYear));
+        $DeathYear = intval($this->test_input($DeathYear));
+        $updateDY = false;
+        $errors = "";
+        if ($Deceased == NULL) {
+            $query = "UPDATE authors SET DeathYear = NULL WHERE AuthorID = $AuthorID;";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
+        } elseif ($DeathYear > date("Y") || $DeathYear <= $BirthYear) { 
+            $errors = "Death Year:Please enter a year between the Birth Year and the current year or unchecked 'Deceased'";
+        } elseif ($DeathYear == "") {
+            $errors = "Death Year:Please enter a year or unchecked 'Deceased'";
+        } else {
+            $updateDY = true;
+        }
+        if ($BirthYear == "") {
+            $errors = "Birth Year:Please enter a birth year.";
+        } elseif ($this->BirthYear > date("Y") || $this->BirthYear < 0000) { 
+            $errors = "Birth Year:Please enter a year between 0000 and the current year";
+        } elseif ($updateDY) {
+            $query = "UPDATE authors SET DeathYear = $DeathYear, BirthYear = $BirthYear WHERE AuthorID = $AuthorID;";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
+        } 
+        return $errors;
+    }
+
+    function update_image($pdo, $ImagePath, $AuthorID) {
+        $errors = "";
+        $query = "UPDATE authors SET ImagePath = '$ImagePath' WHERE AuthorID = $AuthorID;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        return $errors;
+    }
+
+    function update_bio($pdo, $Bio, $AuthorID) {
+        $Bio = $this->test_input($Bio);
+        $errors = "";
+        if (strlen($Bio) > 400) {
+            $errors = "Bio:The Bio should be below 400 characters.";
+        } else {
+        $query = "UPDATE authors SET Bio = '$Bio' WHERE AuthorID = $AuthorID;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        }
+        return $errors;
+    }
+    
 }
