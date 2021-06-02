@@ -24,6 +24,12 @@ function exitEditForm() {
         document.getElementById("password-edit").style = "display: none;";
     } if (document.getElementById("delete-confirm")) {
         document.getElementById("delete-confirm").style = "display: none;";
+    } if (document.getElementById("birth-edit")) {
+        document.getElementById("birth-edit").style = "display: none;"
+    } if (document.getElementById("image-edit")) {
+        document.getElementById("image-edit").style = "display: none;"
+    } if (document.getElementById("bio-edit")) {
+        document.getElementById("bio-edit").style = "display: none;"
     }
 }
 
@@ -40,6 +46,12 @@ function editBox(e) {
         document.getElementById("password-edit").style = "display: block;"
     } else if (e.id == "delete-btn") {
         document.getElementById("delete-confirm").style = "display: block;"
+    } else if (e.id == "birth-div") {
+        document.getElementById("birth-edit").style = "display: block;"
+    } else if (e.id == "image-div") {
+        document.getElementById("image-edit").style = "display: block;"
+    } else if (e.id == "bio-div") {
+        document.getElementById("bio-edit").style = "display: block;"
     }
 }
 
@@ -55,5 +67,6 @@ function bookFormSelector() {
         document.getElementById("author-form").style = "display: none;";
     }
 }
-
-bookFormSelector();
+if (document.getElementById("select-option")) {
+    bookFormSelector();
+}

@@ -19,13 +19,27 @@ if (isset($_GET["authorMsg"])) {
         $authorErrors += [$error_item[0] => $error_item[1]];
     }
 }
-
+$errors = [];
+if (isset($_GET["msg"])) {
+    $error_msgs = explode("|", $_GET["msg"]);
+    foreach ($error_msgs as $value) {
+        $error_item = explode(":", $value);
+        $errors += [$error_item[0] => $error_item[1]];
+    }
+}
+if (isset($_GET["m"])) {
+    ?>
+    <div class="alert alert-success" role="alert" onclick="dismiss(this)">
+        This user has been added successfully.
+    </div>
+    <?php
+}
 ?>
 
 <main class="container row m-auto pt-2">
     <div class="col-12 col-lg-6 m-auto">
         <h3 class="text-primary pb-0 pb-md-0 p-md-5 p-3">Add a New Book</h3>
-        <form action="../controller/addbookcontroller.php" method="POST">
+        <form action="../controller/addbookcontroller.php" method="POST" enctype="multipart/form-data">
             <div class="form-group mb-3">
                 <label for="" class="form-label">Author</label>
                 <select id="AuthorID" name="AuthorID" class="form-select" onchange="bookFormSelector()">
@@ -35,6 +49,12 @@ if (isset($_GET["authorMsg"])) {
                         <option value="<?php echo $v["AuthorID"]; ?>" <?php if ($authorRedirect == $v['AuthorID']) echo "selected"; ?>><?php echo $v["Name"]; ?></option>
                     <?php } ?>
                 </select>
+                <?php if (isset($errors["AuthorIDErr"])) {
+                    ?>
+                    <div class="alert alert-danger" role="alert" onclick="dismiss(this)">
+                <?php echo $errors["AuthorIDErr"] ?>
+                    </div>
+                <?php } ?>
             </div>
 
 
@@ -42,23 +62,53 @@ if (isset($_GET["authorMsg"])) {
                 <div class="form-group mb-3">
                     <label for="Title" class="form-label">Title</label>
                     <input type="text" name="Title" class="form-control">
+                    <?php if (isset($errors["TitleErr"])) {
+                    ?>
+                    <div class="alert alert-danger" role="alert" onclick="dismiss(this)">
+                    <?php echo $errors["TitleErr"] ?>
+                    </div>
+                    <?php } ?>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="PublishedYear" class="form-label">Year Published</label>
                     <input type="number" name="PublishedYear" class="form-control">
+                    <?php if (isset($errors["PublishedYearErr"])) {
+                    ?>
+                    <div class="alert alert-danger" role="alert" onclick="dismiss(this)">
+                    <?php echo $errors["PublishedYearErr"] ?>
+                    </div>
+                    <?php } ?>
                 </div>
                 <div class="form-group mb-3">
                     <label for="Image" class="form-label">Cover Photo</label>
                     <input type="file" name="ImagePath" class="form-control">
+                    <?php if (isset($errors["ImagePathErr"])) {
+                    ?>
+                    <div class="alert alert-danger" role="alert" onclick="dismiss(this)">
+                    <?php echo $errors["ImagePathErr"] ?>
+                    </div>
+                    <?php } ?>
                 </div>
                 <div class="form-group mb-3">
                     <label for="CopiesSold" class="form-label">Copies Sold</label>
                     <input type="text" name="CopiesSold" class="form-control">
+                    <?php if (isset($errors["CopiesSoldErr"])) {
+                    ?>
+                    <div class="alert alert-danger" role="alert" onclick="dismiss(this)">
+                    <?php echo $errors["CopiesSoldErr"] ?>
+                    </div>
+                    <?php } ?>
                 </div>
                 <div class="form-group mb-3">
                     <label for="Summary" class="form-label">Summary</label>
                     <textarea name="Summary" cols="30" rows="10" class="form-control"></textarea>
+                    <?php if (isset($errors["SummaryErr"])) {
+                    ?>
+                    <div class="alert alert-danger" role="alert" onclick="dismiss(this)">
+                    <?php echo $errors["SummaryErr"] ?>
+                    </div>
+                    <?php } ?>
                 </div>
                 <button type="submit" class="btn btn-primary mb-3">Create</button>
             </div>

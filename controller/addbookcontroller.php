@@ -15,9 +15,16 @@ try {
     } else {
         $image_path = "http://localhost/PHPAssessment/view/img/anonymous.png";
     }
-    $book->get_information($BookID, $Title, $AuthorID, $PublishedYear, $ImagePath, $CopiesSold, $Summary, $Clicks, $EntryCreated, $EntryLastUpdated);
-    $book->insert_book($pdo);
-    header("location:../view/addbook.php?msg=Saved");
+    $book->get_information($Title, $AuthorID, $PublishedYear, $image_path, $CopiesSold, $Summary);
+    $errors = [];
+        $errors = $book->validate($pdo);
+        if (!empty($errors)) {
+        $msg = implode("|", $errors);
+        header("location:../view/addbook.php?msg=$msg&author=$AuthorID");
+        } else {
+        $book->insert_book($pdo);
+        header("location:../view/addbook.php?m=Saved");
+        }
 } catch (exception $e) {
     header("location:../view/addbook.php?msg=" . $e->getMessage());
 }
