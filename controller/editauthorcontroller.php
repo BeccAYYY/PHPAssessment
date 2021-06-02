@@ -37,7 +37,7 @@ try {
         $log->delete_authors_logs($pdo, $id);
         $author->delete_author($pdo, $id);
 
-        header("location:../view/authorsdisplay.php?msg=UserDeleted");
+        header("location:../view/authorsdisplay.php?msg=AuthorDeleted");
         exit();
     }
     if (!empty($error)) {

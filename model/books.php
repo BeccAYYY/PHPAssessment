@@ -128,8 +128,8 @@ function test_input($data) {
         $stmt->execute() or die(print_r($stmt->errorInfo(),true));
     }
 
-    public function search_books_by_id($pdo, $BookID) {
-        $query = "SELECT * FROM books WHERE BookID=?";
+    public function search_book_by_id($pdo, $BookID) {
+        $query = "SELECT b.BookID, b.Title, b.AuthorID, b.PublishedYear, b.ImagePath, b.CopiesSold, b.Summary, b.Clicks, b.EntryCreated, a.Name  FROM books AS b INNER JOIN authors AS a on b.AuthorID = a.AuthorID WHERE BookID=?";
         $stmt = $pdo->prepare($query);
         $stmt->execute(array($BookID));
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -140,6 +140,14 @@ function test_input($data) {
         $query = "DELETE FROM books WHERE AuthorID = $AuthorID";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
+    }
+
+    public function get_all_books($pdo) {
+        $query = "SELECT b.BookID, b.Title, b.AuthorID, b.PublishedYear, b.ImagePath, b.CopiesSold, b.Summary, b.Clicks, b.EntryCreated, a.Name  FROM books AS b INNER JOIN authors AS a on b.AuthorID = a.AuthorID";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
     }
 }
 

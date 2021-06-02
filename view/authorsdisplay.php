@@ -5,7 +5,7 @@ include "header.php";
 include "../controller/authorsdisplaycontroller.php";
 
 if (isset($_GET["msg"])) { 
-    if ($_GET["msg"] = "UserDeleted") {?>
+    if ($_GET["msg"] = "AuthorDeleted") {?>
 <div class="alert alert-success" role="alert" onclick="dismiss(this)">
     <p class="m-0">Author deleted successfully.</p>
 </div>

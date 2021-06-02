@@ -30,6 +30,16 @@ function exitEditForm() {
         document.getElementById("image-edit").style = "display: none;"
     } if (document.getElementById("bio-edit")) {
         document.getElementById("bio-edit").style = "display: none;"
+    } if (document.getElementById("title-edit")) {
+        document.getElementById("title-edit").style = "display: none;"
+    } if (document.getElementById("author-edit")) {
+        document.getElementById("author-edit").style = "display: none;"
+    } if (document.getElementById("published-edit")) {
+        document.getElementById("published-edit").style = "display: none;"
+    } if (document.getElementById("sold-edit")) {
+        document.getElementById("sold-edit").style = "display: none;"
+    } if (document.getElementById("summary-edit")) {
+        document.getElementById("summary-edit").style = "display: none;"
     }
 }
 
@@ -52,6 +62,16 @@ function editBox(e) {
         document.getElementById("image-edit").style = "display: block;"
     } else if (e.id == "bio-div") {
         document.getElementById("bio-edit").style = "display: block;"
+    } else if (e.id == "title-div") {
+        document.getElementById("title-edit").style = "display: block;"
+    } else if (e.id == "author-div") {
+        document.getElementById("author-edit").style = "display: block;"
+    } else if (e.id == "published-div") {
+        document.getElementById("published-edit").style = "display: block;"
+    } else if (e.id == "sold-div") {
+        document.getElementById("sold-edit").style = "display: block;"
+    } else if (e.id == "summary-div") {
+        document.getElementById("summary-edit").style = "display: block;"
     }
 }
 
@@ -67,6 +87,7 @@ function bookFormSelector() {
         document.getElementById("author-form").style = "display: none;";
     }
 }
+
 if (document.getElementById("select-option")) {
     bookFormSelector();
 }
