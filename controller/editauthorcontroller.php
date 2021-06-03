@@ -33,8 +33,12 @@ try {
     } elseif (isset($_POST["Bio"])) {
         $error = $author->update_bio($pdo, $_POST["Bio"], $id);
     } elseif (isset($_POST["Delete"])) {
+
+        $deleteBooks = $book->search_book_by_author($pdo, $id);
+        foreach ($deleteBooks as $v) {
+            $log->delete_books_logs($pdo, $v["BookID"]);
+        }
         $book->delete_authors_books($pdo, $id);
-        $log->delete_authors_logs($pdo, $id);
         $author->delete_author($pdo, $id);
 
         header("location:../view/authorsdisplay.php?msg=AuthorDeleted");

@@ -12,7 +12,9 @@ if (isset($_GET["msg"])) {
     }
 }
 ?>
-
+<div class="container mt-5">
+    <h4 class="text-primary">All Books</h4>
+</div>
 <div class="container row m-auto my-5">
 
 <?php

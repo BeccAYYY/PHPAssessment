@@ -1,5 +1,5 @@
 <footer class="bg-primary text-white p-5">
-    <p>This is my footer where I think I will have to put content later.</p>
+    <p>Created for an assessmemt by Rebecca Sell. Copyright 2021.</p>
 </footer>
 
 

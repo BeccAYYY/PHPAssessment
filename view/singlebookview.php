@@ -19,10 +19,12 @@ if (isset($_GET["msg"])) {
     <?php
     }
 ?>
-<div class="container pt-3">
-    <div>
+    <div class="container pt-3">
         <p><a href="booksdisplay.php">&laquo; Back to all Books</a></p>
     </div>
+
+<div class="container row m-auto">
+    
 
     <div class="m-auto col-12 col-lg-6 border bg-light p-3 d-flex flex-column align-items-center mb-5">
 
@@ -63,14 +65,34 @@ if (isset($_GET["msg"])) {
             </p>
             <i class="fas fa-pen-square position-absolute fs-5"></i>
         </div>
-
+        <?php if ($sRole == "Admin" || $sRole == "User") { ?>
         <p class="text-muted m-0">Created on <?php echo $bookdetails["EntryCreated"]; ?></p>
         <p>Viewed <?php echo $bookdetails["Clicks"]; ?> times</p>
 
         <div class="btn btn-primary text-white m-3" id="delete-btn" onclick="editBox(this)">
             <p class="m-0">Delete Book</p>
         </div>
+        <?php } ?>
     </div>
+<?php if ($sRole == "Admin") { ?>
+    <div class="col-12 col-lg-6 border bg-light p-3 mb-5 mt-0 align-self-start m-auto">
+        <h5 class="text-primary">Logs</h5>
+        <?php 
+            if (empty($logs)) {
+                ?><p class="text-muted"> No logs.
+            <?php } 
+            foreach ($logs as $v) { ?>
+            <div class="row text-center">
+                <div class="col"><p><?php echo $v["Date"]; ?></p></div>
+                <div class="col"><p><a href="singleuserdisplay.php?id=<?php echo $v["UserID"];?>"><?php echo $v["Username"]; ?></a></p></div>
+                <div class="col"><p><b><?php echo $v["ColumnName"]; ?></b></p></div>
+                <div class="col-12">
+                    <p><?php echo $v["FromValue"]; ?><b> => </b><?php echo $v["ToValue"]; ?></p>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+    <?php } ?>
 </div>
 
 <div id="edit-overlay" onclick="exitEditForm()">
@@ -101,7 +123,7 @@ if (isset($_GET["msg"])) {
     </div>
 
     <div id="published-edit" class="edit-form">
-        <label for="PublishedYear">Edit Author</label>
+        <label for="PublishedYear">Edit Published Year</label>
         <form id="author-edit-form" action="../controller/editbookcontroller.php" method="POST">
             <input type="number" name="PublishedYear" class="form-control my-3">
             <input type="hidden" value="<?php echo $bookdetails["BookID"]; ?>" name="BookID">
@@ -130,7 +152,7 @@ if (isset($_GET["msg"])) {
     </div>
 
     <div id="summary-edit" class="edit-form">
-        <label for="Summary">Edit Copies Sold</label>
+        <label for="Summary">Edit Summary</label>
         <form id="summary-edit-form" action="../controller/editbookcontroller.php" method="POST">
             <textarea name="Summary" cols="30" rows="10" class="form-control my-3"><?php echo $bookdetails['Summary']; ?></textarea>
             <input type="hidden" value="<?php echo $bookdetails["BookID"]; ?>" name="BookID">

@@ -13,7 +13,7 @@ try {
         move_uploaded_file($_FILES["ImagePath"]["tmp_name"],$ImagePath);
         $image_path = "http://localhost/PHPAssessment/view/img/" . $imageName;
     } else {
-        $image_path = "http://localhost/PHPAssessment/view/img/anonymous.png";
+        $image_path = "http://localhost/PHPAssessment/view/img/unknown-book.jpg";
     }
     $book->get_information($Title, $AuthorID, $PublishedYear, $image_path, $CopiesSold, $Summary);
     $errors = [];

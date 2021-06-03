@@ -23,16 +23,18 @@ if (isset($_GET["msg"])) {
     <?php
     }
 ?>
-<div class="container pt-3">
+
     <?php 
         if ($sRole == "Admin")  {
             ?>
-    <div>
+    <div class="container pt-3">
         <p><a href="usersdisplay.php">&laquo; Back to all users</a></p>
     </div>
     <?php
         } 
     ?>
+
+<div class="container row m-auto">
 
 
     <div class="m-auto col-12 col-lg-6 border bg-light p-3 d-flex flex-column align-items-center">
@@ -73,6 +75,29 @@ if (isset($_GET["msg"])) {
         </div>
         </div>
     </div>
+
+
+    <?php if ($sRole == "Admin") { ?>
+    <div class="col-12 col-lg-6 border bg-light p-3 mb-5 mt-0 align-self-start m-auto">
+        <h5 class="text-primary">Logs</h5>
+        <?php 
+        if (empty($logs)) {
+            ?><p class="text-muted"> No logs.
+        <?php } 
+        foreach ($logs as $v) { ?>
+            <div class="row text-center">
+                <div class="col"><p><?php echo $v["Date"]; ?></p></div>
+                <div class="col"><p><a href="singlebookdisplay.php?id=<?php echo $v["BookID"];?>"><?php echo $v["Title"]; ?></a></p></div>
+                <div class="col"><p><b><?php echo $v["ColumnName"]; ?></b></p></div>
+                <div class="col-12">
+                    <p><?php echo $v["FromValue"]; ?><b> => </b><?php echo $v["ToValue"]; ?></p>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+    <?php } ?>
+
+
 </div>
 
 

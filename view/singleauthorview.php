@@ -63,7 +63,7 @@ if (isset($_GET["msg"])) {
             <i class="fas fa-pen-square position-absolute fs-5"></i>
         </div>
 
-
+        <?php if ($sRole == "Admin" || $sRole == "User") { ?>
         <div class="p-2">
             <p class="text-muted small m-0"><b>Created: </b><?php echo $authordetails["CreatedDate"]; ?></p>
         </div>
@@ -72,7 +72,22 @@ if (isset($_GET["msg"])) {
         <div class="btn btn-primary text-white m-3" id="delete-btn" onclick="editBox(this)">
             <p class="m-0">Delete Author</p>
         </div>
+        <?php } ?>
     </div>
+    <div class="container row m-auto my-5">
+
+<?php
+foreach ($bookRow as $v) {
+    ?>
+    <div class="col-12 col-md-6 col-lg-4 border p-3">
+        <a class="h4" href="singlebookview.php?id=<?php echo $v["BookID"] ?>"><p><?php echo $v["Title"]; ?></p></a>
+        <p><?php echo $v["PublishedYear"]; ?></p>
+        <img src="<?php echo $v['ImagePath']; ?>" class="img-fluid">
+    </div>
+    <?php
+}
+?>
+</div>
 </div>
 
 
@@ -112,7 +127,7 @@ if (isset($_GET["msg"])) {
             </form>
         </div>
 
-        <?php if ($sRole == "Admin") { ?>
+
         <div id="image-edit" class="edit-form">
         <form id="image-edit-form" action="../controller/editauthorcontroller.php" method="POST" enctype="multipart/form-data">
             <label>Edit Image</label>
@@ -134,8 +149,7 @@ if (isset($_GET["msg"])) {
         </div>
 
 
-        
-        <?php } ?>
+    
         <div id="delete-confirm" class="edit-form">
             <p>Are you sure you wish to delete <?php echo $authordetails["Name"] ?>?</p>
             <p>This will also delete all of their books.</p>

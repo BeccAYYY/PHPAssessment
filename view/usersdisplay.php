@@ -16,6 +16,10 @@ if ($sRole !== "Admin") {
         }
     }
 ?>
+
+<div class="container mt-5">
+    <h4 class="text-primary">All Users</h4>
+</div>
 <div class="container row m-auto my-5">
 
 

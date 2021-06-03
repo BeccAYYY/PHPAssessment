@@ -30,7 +30,7 @@ if (isset($_GET["msg"])) {
 if (isset($_GET["m"])) {
     ?>
     <div class="alert alert-success" role="alert" onclick="dismiss(this)">
-        This user has been added successfully.
+        This book has been added successfully.
     </div>
     <?php
 }

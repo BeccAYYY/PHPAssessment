@@ -30,7 +30,7 @@ function test_input($data) {
     Private $columns = [];
     Private $errors = [];
 
-
+//Function to validate and return an array of validation errors, as well as an array of successful columns for the SQL query.
     public function validate() {
         if ($this->Name == "") {
             $this->errors[] = "NameErr:Name is required";
@@ -127,6 +127,7 @@ function test_input($data) {
         return $row;
     }
 
+    //Get the most recent author ID.
     public function get_last_id($pdo) {
         $query = "SELECT MAX(AuthorID) FROM authors";
         $stmt = $pdo->prepare($query);
@@ -158,21 +159,20 @@ function test_input($data) {
         $updateDY = false;
         $errors = "";
         if ($Deceased == NULL) {
-            $query = "UPDATE authors SET DeathYear = NULL WHERE AuthorID = $AuthorID;";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute();
+            $DeathYear = "NULL";
+            $updateDY = "true";
         } elseif ($DeathYear > date("Y") || $DeathYear <= $BirthYear) { 
             $errors = "Death Year:Please enter a year between the Birth Year and the current year or unchecked 'Deceased'";
         } elseif ($DeathYear == "") {
             $errors = "Death Year:Please enter a year or unchecked 'Deceased'";
         } else {
-            $updateDY = true;
+            $updateDY = "true";
         }
         if ($BirthYear == "") {
             $errors = "Birth Year:Please enter a birth year.";
         } elseif ($this->BirthYear > date("Y") || $this->BirthYear < 0000) { 
             $errors = "Birth Year:Please enter a year between 0000 and the current year";
-        } elseif ($updateDY) {
+        } elseif ($updateDY == "true") {
             $query = "UPDATE authors SET DeathYear = $DeathYear, BirthYear = $BirthYear WHERE AuthorID = $AuthorID;";
             $stmt = $pdo->prepare($query);
             $stmt->execute();
@@ -205,6 +205,14 @@ function test_input($data) {
         $query = "DELETE FROM authors WHERE AuthorID = $AuthorID;";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
+    }
+
+    public function authors_by_created($pdo) {
+        $query = "SELECT * FROM authors ORDER BY CreatedDate DESC LIMIT 3;";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
     }
     
 }

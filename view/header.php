@@ -64,10 +64,10 @@ $sUsername = "";
                     </li>
                 </ul>
                 <div class="row align-items-start">
-                <form class="d-flex col-10">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit">Search</button>
-                </form>
+                <!-- <form class="d-flex col-10"> -->
+                    <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
+                    <!-- <button class="btn btn-outline-light" type="submit">Search</button> -->
+                <!-- </form> -->
                 <ul class="navbar-nav col-2">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
